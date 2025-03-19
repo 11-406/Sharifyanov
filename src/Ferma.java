@@ -1,20 +1,22 @@
+package src;
+
 import java.util.Random;
 
-public class Main {
+public class Ferma {
     public static void main(String[] args) {
-
         Random random = new Random();
-        int p = random.nextInt(101);
-        //sqrt
-        double startSqrt = System.nanoTime();
+
+        int p =101;
+        int n = random.nextInt(1,p-1);
+        System.out.println(n);
+        System.out.println("----------------Sqrt test----------------");
         System.out.println(prost(p));
-        double finishSqrt = System.nanoTime();
-        System.out.println((finishSqrt - startSqrt) / 100000);
-        //log(n)
-        double startFerma = System.nanoTime();
-        System.out.println(checkFerma(4,p));
-        double finishFerma = System.nanoTime();
-        System.out.println((finishFerma - startFerma) / 100000);
+
+        System.out.println("----------------Ferma test----------------");
+        for(int i = 0; i < 6; i++) {
+            int h = random.nextInt(1,p-1);
+            System.out.println(checkFerma(h,p) + " " + h + ":" + powerNumber(h,p-1) % p);
+        }
     }
 
     public static boolean prost(int p) {
@@ -30,27 +32,29 @@ public class Main {
         return true;
     }
 
-    public static long powerNumber(long n , int p) {
-        long res = 1;
-        while(p  > 0) {
-            if(p % 2 != 0) {
+
+    public static int powerNumber(int n , int p) {
+        int res = 1;
+        while (p > 0) {
+            if (p % 2 != 0) {
                 res *= n;
-                n*=n;
-                p /=2;
+                n *= n;
+                p /= 2;
             } else {
-                n*=n;
-                p /=2;
+                n *= n;
+                p /= 2;
             }
         }
         return res;
-
     }
 
-    public static boolean checkFerma(long n, int p) {
+
+    public static boolean checkFerma(int n, int p) {
         if(powerNumber(n,p-1) % p == 1) {
             return true;
         } else {
             return false;
         }
     }
+
 }
